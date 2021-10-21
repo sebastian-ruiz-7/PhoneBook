@@ -3,17 +3,17 @@ const express=require('express');
 
 //Fetch internal modules
 const config=require('./config');
+const user=require('./components/user/network');
 
+console.log(config);
 
 const app=express();
 
 app.use(express.json());
 
-app.use('/',(req,res)=>{
-    res.send('Bye');
-})
+app.use('/user',user)
 
-app.listen(config.port_api,()=>{
-    console.log(`escuchando en el puerto ${config.port_api}`);
+app.listen(config.api.port,()=>{
+    console.log(`escuchando en el puerto ${config.api.port}`);
 })
 
