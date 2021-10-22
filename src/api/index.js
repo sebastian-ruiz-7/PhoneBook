@@ -5,7 +5,7 @@ const express=require('express');
 const config=require('./config');
 const user=require('./components/user/network');
 
-console.log(config);
+
 
 const app=express();
 

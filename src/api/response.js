@@ -23,5 +23,6 @@ const failed=(req,res,message,status,internalLog)=>{
 }
 
 module.exports={
-    succes
+    succes,
+    failed
 };

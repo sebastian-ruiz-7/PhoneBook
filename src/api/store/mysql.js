@@ -4,7 +4,6 @@ const config=require('../config');
 //Importing dependencies
 const mysql=require('mysql2')
 
-let connection;
 
 let dbConfig={
     host:config.mysql.host,
@@ -14,6 +13,7 @@ let dbConfig={
     port:config.mysql.port
 }
 
+let connection;
 
 const handleConnection=()=>{
     connection=mysql.createConnection(dbConfig);
@@ -47,12 +47,51 @@ const get=(Table,data)=>{
             if (err) {
                 return reject(err);
             }else{
-                return resolve(result)
+                return resolve(result);
+            }
+        })
+    })
+};
+
+const add=(Table,data)=>{
+    return new Promise((resolve,reject)=>{
+        connection.query(`INSERT INTO ${Table} SET ?`,data,(err,result)=>{
+            if (err) {
+                return reject(err);
+            }else{
+                return resolve(result);
+            }
+        })
+    })
+};
+
+const update=(Table,data)=>{
+    return new Promise((resolve,reject)=>{
+        connection.query(`UPDATE ${Table} SET ? WHERE id=${data.id}`,data,(err,result)=>{
+            if (err) {
+                reject(err);
+            }else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const remove=(Table,data)=>{
+    return new Promise((resolve,reject)=>{
+        connection.query(`DELETE FROM ${Table} WHERE id=${data.id}`,data,(err,result)=>{
+            if (err) {
+                reject(err);
+            }else{
+                resolve(result);
             }
         })
     })
 }
 
 module.exports={
-    get
+    get,
+    add,
+    update,
+    remove
 }
