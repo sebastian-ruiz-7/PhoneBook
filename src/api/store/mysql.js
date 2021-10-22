@@ -67,7 +67,7 @@ const add=(Table,data)=>{
 
 const update=(Table,data)=>{
     return new Promise((resolve,reject)=>{
-        connection.query(`UPDATE ${Table} SET ? WHERE id=${data.id}`,data,(err,result)=>{
+        connection.query(`UPDATE ${Table} SET ? WHERE id=?`,[data,data.id],(err,result)=>{
             if (err) {
                 reject(err);
             }else{
@@ -79,7 +79,7 @@ const update=(Table,data)=>{
 
 const remove=(Table,data)=>{
     return new Promise((resolve,reject)=>{
-        connection.query(`DELETE FROM ${Table} WHERE id=${data.id}`,data,(err,result)=>{
+        connection.query(`DELETE FROM ${Table} WHERE ?`,data,(err,result)=>{
             if (err) {
                 reject(err);
             }else{

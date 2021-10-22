@@ -13,7 +13,7 @@ router.post('/',addUser)      //add a user to the table User
 
 router.put('/',updateUser)    //update the info from an user
 
-router.delete('/:id',deleteUser) //deletes a user
+router.delete('/',deleteUser) //deletes a user
 
 function getUser(req,res) {
     controller.get(req.params.id) //Fetching the data from the user specified in the req
@@ -37,7 +37,7 @@ function updateUser(req,res) {
 
 
 function deleteUser(req,res) {
-    controller.deleteUser(req.params.id)
+    controller.deleteUser(req.body)
         .then((message)=>response.succes(req,res,message,200))
         .catch((reason)=>response.failed(req,res,reason,400));
 }

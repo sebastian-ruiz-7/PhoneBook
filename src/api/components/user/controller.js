@@ -1,3 +1,6 @@
+const {nanoid}=require('nanoid')
+const auth=require('../../auth/index-Auth');
+
 module.exports=(injectedStore)=>{
     let store=injectedStore;
     if (!store) {
@@ -7,28 +10,40 @@ module.exports=(injectedStore)=>{
     const get=async(id)=>{
         const sortdata={id:id}
         const desiredUser=await store.get('user',sortdata);
+        // const password=await auth.getUser(id); This code has to be uncomment in case we want the password from the user
+        // console.log(password[0].password);
         return desiredUser;
     }
 
     const addUser=async(data)=>{
-        if (!data.id || !data.name || !data.email || !data.password) {
+        if (!data.name || !data.email || !data.password) {
             throw 'Invalid query';
+        }else if (!data.id) {
+            const newId=nanoid();
+            data.id=newId;
         }
-        const sortData={id:data.id, name:data.name, email:data.email, password:data.password};
         
+        let sortData={id:data.id, name:data.name, email:data.email};
+
         const newUser=await store.add('user',sortData);
+        const newAuthRow=await auth.addUser(data);
         return newUser;
     }   
 
     const updateUser=async(data)=>{
+        if (!data.id || !data.name || !data.email || !data.password) {
+            throw 'Invalid query';
+        }
         const sortData={id:data.id, name:data.name, email:data.email};
         const updatedUser=await store.update('user',sortData);
+        const updatedAuthRow=await auth.updateUser(data);
         return updatedUser;
     }
 
     const deleteUser=async(data)=>{
-        const sortData={id:data};
+        const sortData={id:data.id};
         const deletedUser=await store.remove('user',sortData);
+        const deleteAuthRow=await auth.deleteUser(data);
         return deletedUser;
     }
 
