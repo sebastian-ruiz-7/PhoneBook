@@ -1,5 +1,9 @@
-const {nanoid}=require('nanoid')
+//Importing external modules
+const {nanoid}=require('nanoid');
+
+//Importing internal modules
 const auth=require('../../auth/index-Auth');
+const jwtHandling=require('../../auth/jwtHandling');
 
 module.exports=(injectedStore)=>{
     let store=injectedStore;
@@ -15,6 +19,13 @@ module.exports=(injectedStore)=>{
         return desiredUser;
     }
 
+    const getUserByToken=async(decodedToken)=>{
+        
+        const sortdata={id:decodedToken.id};
+        const desiredUser=await store.get('user',sortdata);
+        return desiredUser;
+    }
+
     const addUser=async(data)=>{
         if (!data.name || !data.email || !data.password) {
             throw 'Invalid query';
@@ -24,10 +35,18 @@ module.exports=(injectedStore)=>{
         }
         
         let sortData={id:data.id, name:data.name, email:data.email};
+        
+        let verifyTheUserIsNew=await store.get('user',{email:sortData.email});
+        
+        if (Object.keys(verifyTheUserIsNew).length>0) {
+            throw 'email already taken';
+        }
 
         const newUser=await store.add('user',sortData);
         const newAuthRow=await auth.addUser(data);
-        return newUser;
+        const token=jwtHandling.sign(JSON.parse(JSON.stringify({id:sortData.id,email:sortData.email})));
+        return token;
+        //return newUser;
     }   
 
     const updateUser=async(data)=>{
@@ -35,6 +54,13 @@ module.exports=(injectedStore)=>{
             throw 'Invalid query';
         }
         const sortData={id:data.id, name:data.name, email:data.email};
+
+        let verifyTheUserIsNew=await store.get('user',{email:sortData.email});
+        
+        if (Object.keys(verifyTheUserIsNew).length>0) {
+            throw 'email already taken';
+        }
+        
         const updatedUser=await store.update('user',sortData);
         const updatedAuthRow=await auth.updateUser(data);
         return updatedUser;
@@ -47,11 +73,13 @@ module.exports=(injectedStore)=>{
         return deletedUser;
     }
 
+    
 
     return{
         get,
         addUser,
         updateUser,
-        deleteUser
+        deleteUser,
+        getUserByToken
     }
 }

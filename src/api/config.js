@@ -8,5 +8,8 @@ module.exports={
         user: process.env.USER || 'root',
         password: process.env.MYSQL_PASSWORD || 'Nokyd9MES&fY4tH&',
         database: process.env.MYSQL_DATABASE || 'agenda_Telefonica'
+    },
+    jwt:{
+        secret:'palabraUltraSecreta'
     }
 }

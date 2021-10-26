@@ -75,7 +75,7 @@ const update=(Table,data)=>{
             }
         })
     })
-}
+};
 
 const remove=(Table,data)=>{
     return new Promise((resolve,reject)=>{
@@ -87,7 +87,9 @@ const remove=(Table,data)=>{
             }
         })
     })
-}
+};
+
+
 
 module.exports={
     get,

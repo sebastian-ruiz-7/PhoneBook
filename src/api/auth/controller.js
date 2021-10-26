@@ -1,3 +1,9 @@
+//Importing external modules
+const bcrypt=require('bcrypt');
+
+//Importing internal modules
+const jwtHandling=require('./jwtHandling');
+
 module.exports=(injectedStore)=>{
     let store=injectedStore;
     if (!injectedStore) {
@@ -12,12 +18,14 @@ module.exports=(injectedStore)=>{
     }
 
     const addUser=async(data)=>{
+        data.password=await bcrypt.hash(data.password,5);
         const sortedData={id:data.id,email:data.email,password:data.password};
         const addedUser=await store.add('auth',sortedData);
         return addedUser;
     }
 
     const updateUser=async(data)=>{
+        data.password=await bcrypt.hash(data.password,5);
         const sortedData={id:data.id,email:data.email,password:data.password};
         const updatedUser=await store.update('auth',sortedData);
         return updatedUser;
@@ -29,10 +37,31 @@ module.exports=(injectedStore)=>{
         return deletedUser;
     }
 
+
+    const login=async(data)=>{
+        if (!data.email) {
+            throw 'Invalid query';
+        }
+        let desiredUser=await store.get('auth',{email:data.email});
+        if (Object.keys(desiredUser).length===0) {
+            throw 'Contraseña o correo incorrecto';
+        }
+        desiredUser=desiredUser[0];
+        const match=await bcrypt.compare(data.password,desiredUser.password)
+        if (match) {
+            const token=jwtHandling.sign(JSON.parse(JSON.stringify({id:desiredUser.id,email:desiredUser.email})));
+            return token;
+        }else{
+            throw 'Contraseña o correo incorrecto';
+        }
+    }
+
+    
     return{
         addUser,
         getUser,
         updateUser,
-        deleteUser
+        deleteUser,
+        login,
     }
 }
