@@ -89,11 +89,33 @@ const remove=(Table,data)=>{
     })
 };
 
+const removeNumber=(Table,data)=>{
+    return new Promise((resolve,reject)=>
+    connection.query(`DELETE FROM ${Table} WHERE id=? AND numbers=?`,[data.id,data.numbers],(err,result)=>{
+        if (err) {
+            reject(err);
+        }else{
+            resolve(result);
+        }
+    }))
+}
 
+const updateNumber=(Table,data)=>{
+    return new Promise((resolve,reject)=>
+    connection.query(`UPDATE ${Table} SET name=?,alias=?,numbers=? WHERE id=? AND numbers=?`,[data.name,data.alias,data.numbers,data.id,data.oldNumber],(err,result)=>{
+        if (err) {
+            reject(err);
+        }else{
+            resolve(result);
+        }
+    }))
+}
 
 module.exports={
     get,
     add,
     update,
-    remove
+    remove,
+    removeNumber,
+    updateNumber
 }
