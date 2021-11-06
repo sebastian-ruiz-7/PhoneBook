@@ -6,10 +6,11 @@ module.exports=(action)=>{
     }
 
     const middleware=(req,res,next)=>{
-        if (action==='logged') {
-            const verifyIdentity=auth.check.verifyOwn(req);
-            next();
-        }else if (action==='decodeToken') {
+        // if (action==='logged') {
+        //     const verifyIdentity=auth.check.verifyOwn(req);
+        //     next();
+        // }
+        if (action==='decodeToken') {
             const getIdentity=auth.check.decodedToken(req);
             next();
         }

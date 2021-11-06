@@ -24,15 +24,15 @@ module.exports=(injectedStore)=>{
         return addedUser;
     }
 
-    const updateUser=async(data)=>{
-        data.password=await bcrypt.hash(data.password,5);
-        const sortedData={id:data.id,email:data.email,password:data.password};
+    const updateUser=async(req)=>{
+        req.body.password=await bcrypt.hash(req.body.password,5);
+        const sortedData={id:req.user.id,email:req.body.email,password:req.body.password};
         const updatedUser=await store.update('auth',sortedData);
         return updatedUser;
     }
 
-    const deleteUser=async(data)=>{
-        const sortedData={id:data.id};
+    const deleteUser=async(req)=>{
+        const sortedData={id:req.user.id};
         const deletedUser=await store.remove('auth',sortedData);
         return deletedUser;
     }

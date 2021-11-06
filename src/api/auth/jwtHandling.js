@@ -14,15 +14,15 @@ const verify=(token)=>{
 }
 
 const check={
-    verifyOwn:(req)=>{
-        let token=req.headers.authorization;
-        token=sortToken(token);
-        token=verify(token);
-        req.user=token;
-        if (req.body.id!==token.id) {
-            throw 'you do not have the permissions'
-        }
-    },
+    // verifyOwn:(req)=>{
+    //     let token=req.headers.authorization;
+    //     token=sortToken(token);
+    //     token=verify(token);
+    //     req.user=token;
+    //     if (req.body.id!==token.id) {
+    //         throw 'you do not have the permissions'
+    //     }
+    // },
     decodedToken:(req)=>{
         let token=req.headers.authorization;
         token=sortToken(token);
