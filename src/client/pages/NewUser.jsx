@@ -24,7 +24,7 @@ const NewUser = () => {
             .then(response=>console.log('Usuario añadido exitosamente',response)).catch(err=>console.error(err))
 	}
     return (
-        <>
+        <div className='New-User'>
            <form ref={form}>
                 <label htmlFor="name">Name</label>
                 <input type="name" name='name' placeholder='John Smith' />
@@ -34,7 +34,7 @@ const NewUser = () => {
                 <input type="password" name='password' placeholder='********'/>
                 <button type='submit' onClick={handleSubmit} >Submit!</button>
             </form> 
-        </>
+        </div>
     )
 }
 
