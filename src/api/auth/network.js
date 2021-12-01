@@ -6,7 +6,7 @@ const router=express.Router();
 const controller=require('./index-Auth');
 const response=require('../response');
 
-router.get('/',login);
+router.post('/',login);
 
 function login(req,res) {
     controller.login(req.body)
