@@ -20,6 +20,7 @@ module.exports={
             '@hooks':path.resolve(__dirname,'src/client/hooks'),
             '@pages':path.resolve(__dirname,'src/client/pages'),
             '@routes':path.resolve(__dirname,'src/client/routes'),
+            '@styles':path.resolve(__dirname,'src/client/styles'),
         }
     },
     module:{

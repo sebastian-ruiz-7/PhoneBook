@@ -1,16 +1,36 @@
-import {useEffect, useState} from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
-const API='http://localhost:3000/user/';
+const APIBYID='http://localhost:3000/user/';
+const APIBYTOKEN='http://localhost:3000/user/me/token'
 
-const useGetUser=(id)=>{
+const useGetUserById=async(id)=>{
     const [userInfo,setUserInfo]=useState({});
 
-    useEffect(async()=>{
-        const response=await axios.get(API+id)
-        setUserInfo(response.data.body[0]);
-    },[]);
-    return userInfo;
+    const response=await axios.get(APIBYID+id)
+    setUserInfo(response.data.body[0]);
+
+    return userInfo;        
 };
 
-export {useGetUser}
+const useGetUserByToken=async()=>{
+    try {
+        const token=localStorage.getItem('sessionJWT');
+
+        const response=await axios.get(APIBYTOKEN,{
+            headers:{
+                Authorization:`Bearer ${token}`,
+            }
+        })
+        const userInfo=response.data.body[0];
+        return userInfo;
+
+    } catch (error) {
+        console.error(error);
+    }
+
+
+    
+}
+
+export {useGetUserById,useGetUserByToken}

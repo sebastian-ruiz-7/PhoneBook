@@ -2,6 +2,8 @@
 import React from 'react'
 import axios from 'axios';
 
+//Import styles
+import '@styles/NewUser.css';
 
 const API_newUser='http://localhost:3000/user/'; //Endpoint to add a new user
 
@@ -24,16 +26,18 @@ const NewUser = () => {
             .then(response=>console.log('Usuario añadido exitosamente',response)).catch(err=>console.error(err))
 	}
     return (
-        <div className='New-User'>
-           <form ref={form}>
-                <label htmlFor="name">Name</label>
-                <input type="name" name='name' placeholder='John Smith' />
-                <label htmlFor="email">Email</label>
-                <input type="email" name='email' placeholder='email@email.com' />
-                <label htmlFor="password">Password</label>
-                <input type="password" name='password' placeholder='********'/>
-                <button type='submit' onClick={handleSubmit} >Submit!</button>
-            </form> 
+        <div className='new-user'>
+            <div className='new-user-container'>
+                <form className='new-user-form' ref={form}>
+                    <label  className='new-user__label'     htmlFor="name">Name</label>
+                    <input  className='new-user__input'     type="name" name='name' placeholder='John Smith' />
+                    <label  className='new-user__label'     htmlFor="email">Email</label>
+                    <input  className='new-user__input'     type="email" name='email' placeholder='email@email.com' />
+                    <label  className='new-user__label'     htmlFor="password">Password</label>
+                    <input  className='new-user__input'     type="password" name='password' placeholder='********'/>
+                    <button className='new-user__button'    type='submit' onClick={handleSubmit} >Submit!</button>
+                </form> 
+            </div>
         </div>
     )
 }

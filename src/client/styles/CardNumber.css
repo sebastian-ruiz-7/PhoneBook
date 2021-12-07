@@ -1,0 +1,79 @@
+:root{
+    font-size: 62.5%;
+    --white: #FFFFFF;
+    --black: #000000;
+    --very-light-pink: #C7C7C7;
+    --text-input-field: #F7F7F7;
+    --hospital-green: #ACD9B2;
+    --sm: 14px;
+    --md: 16px;
+    --lg: 18px;
+}
+
+body {
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+    /* box-sizing: border-box; */
+}
+
+.card-container{
+    width: 240px;
+    height: 150px;
+    border: var(--hospital-green) solid 2px;
+    border-radius: 8px;
+    display: grid;
+
+    grid-template-columns: 24px 62px 130px 24px;
+    grid-template-rows: 24px 48px 48px 30px;
+    grid-template-areas: 
+    "update-icon  vacio      vacio   delete-icon"
+    "user-icon    user-icon  name    name"
+    "user-icon    user-icon  alias   alias"
+    "number       number     number  number";
+}
+
+.user-icon{
+    width: 64px;
+    height: 64px;
+    grid-area: user-icon;
+    place-self: center;
+}
+
+.option-icon{
+    width: 20px;
+    height: 20px;
+    place-self: center;
+}
+
+.delete-icon{
+    grid-area: delete-icon;
+}
+
+.update-icon{
+    grid-area: update-icon;
+}
+
+.option-icon:hover{
+    cursor: pointer;
+}
+
+.name{
+    font-size: var(--md);
+    font-weight: bold;
+    grid-area: name;
+    place-self: center;
+}
+
+.alias{
+    font-size: var(--sm);
+    font-weight: 500;
+    grid-area: alias;
+    place-self: center;
+}
+
+.number{
+    font-size: var(--lg);
+    font-weight: bolder;
+    grid-area: number;
+    place-self: center;
+}
