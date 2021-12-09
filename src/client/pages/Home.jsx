@@ -1,14 +1,23 @@
+//Import dependencies
 import React, {useState, useEffect} from 'react'
+//Import hooks
 import { useGetUserByToken } from '@hooks/useGetUser'
 import { useGetUserNumbers } from '@hooks/useGetUserNumbers'
-
+//Import components
 import { NumberList } from '@containers/NumberList'
-// import { Redirect } from 'react-router-dom'
-// import { render } from 'react-dom'
-
+import { AddNumberButton } from '@components/AddNumberButton'
+import { AddNumber } from '@components/AddNumber'
+//Import Portal
+import { Modal } from '@pages/Modal'
+//Import Context
+import { AppContext } from '@context/AppContext'
+//Import Styles
 import '@styles/Home.css'
 
 const Home = () => {
+
+    const {openModal}= React.useContext(AppContext);
+
     const [loading,setLoading]=useState(true);
     const [user,setUser]=useState({name:null,email:null})
     const [userNumbers,setUserNumbers]=useState([])
@@ -38,14 +47,23 @@ const Home = () => {
     }
 
     return (
-        <main className='home-container'>
-            {!loading && (
-                <>
-                    <NumberList numbers={userNumbers}/>
-                    <button onClick={loggingOut}>Log Out</button>
-                </>
+        <>
+            <main className='home-container'>
+                {!loading && (
+                    <>
+                        <NumberList numbers={userNumbers}/>
+                        <button onClick={loggingOut}>Log Out</button>
+                    </>
+                )}
+            </main>
+            <AddNumberButton />
+            
+            {openModal &&(
+                <Modal>
+                    <AddNumber />
+                </Modal>
             )}
-        </main>
+        </>
     )
 }
 
