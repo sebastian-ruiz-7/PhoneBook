@@ -6,10 +6,10 @@ import { NumberList } from '@containers/NumberList'
 // import { Redirect } from 'react-router-dom'
 // import { render } from 'react-dom'
 
-
+import '@styles/Home.css'
 
 const Home = () => {
-    
+    const [loading,setLoading]=useState(true);
     const [user,setUser]=useState({name:null,email:null})
     const [userNumbers,setUserNumbers]=useState([])
 
@@ -23,7 +23,7 @@ const Home = () => {
             const userNumbers=await useGetUserNumbers();
             setUserNumbers(userNumbers);
             setUser(userInfo)
-            console.log(userNumbers)
+            setLoading(false);
         }
 
         handleUser();
@@ -38,11 +38,14 @@ const Home = () => {
     }
 
     return (
-        <>
-
-            <NumberList numbers={userNumbers}/>
-            <button onClick={loggingOut}>Log Out</button>
-        </>
+        <main className='home-container'>
+            {!loading && (
+                <>
+                    <NumberList numbers={userNumbers}/>
+                    <button onClick={loggingOut}>Log Out</button>
+                </>
+            )}
+        </main>
     )
 }
 

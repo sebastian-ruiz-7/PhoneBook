@@ -10,20 +10,15 @@
     --lg: 18px;
 }
 
-body {
-    margin: 0;
-    font-family: 'Quicksand', sans-serif;
-    /* box-sizing: border-box; */
-}
 
 .card-container{
-    width: 240px;
+    width: 300px;
     height: 150px;
     border: var(--hospital-green) solid 2px;
     border-radius: 8px;
     display: grid;
 
-    grid-template-columns: 24px 62px 130px 24px;
+    grid-template-columns: 30px 78px 162px 30px;
     grid-template-rows: 24px 48px 48px 30px;
     grid-template-areas: 
     "update-icon  vacio      vacio   delete-icon"
@@ -40,8 +35,8 @@ body {
 }
 
 .option-icon{
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     place-self: center;
 }
 
