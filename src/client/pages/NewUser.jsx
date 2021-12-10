@@ -23,7 +23,11 @@ const NewUser = () => {
 		};
 		console.log(data);
         axios.post(API_newUser,data)
-            .then(response=>console.log('Usuario añadido exitosamente',response)).catch(err=>console.error(err))
+            .then(response=>{
+                console.log(response);
+                localStorage.setItem('sessionJWT',response.data.body)
+                location.href='/home'
+            }).catch(err=>console.error(err))
 	}
     return (
         <div className='new-user'>
