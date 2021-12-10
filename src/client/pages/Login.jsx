@@ -19,7 +19,6 @@ const Login = () => {
     const handleSubmit=async(event)=>{
         try {
             event.preventDefault();
-    
             const formData=new FormData(form.current);
     
             const data={
@@ -47,10 +46,10 @@ const Login = () => {
         <div className='login-grid-container'>
             <div className='login-container'>
                 <form ref={form} className='form-container'>
-                    <label className='login__label' htmlFor="email">Email</label>
-                    <input className='login__input' type="email" name='email' placeholder='example@email.com' />
-                    <label className='login__label' htmlFor="password">Password</label>
-                    <input className='login__input' type="password" name='password' placeholder='********' />
+                    <label className='login__label' htmlFor="email"     >Email</label>
+                    <input className='login__input' type="email"        name='email' placeholder='example@email.com' />
+                    <label className='login__label' htmlFor="password"  >Password</label>
+                    <input className='login__input' type="password"     name='password' placeholder='********' />
                     {badLogin.error && <p className='error-login-message'>{`${badLogin.error}`}</p>}
                     <button onClick={handleSubmit} className='element-hover login__button'>Log in</button>
                 </form>
