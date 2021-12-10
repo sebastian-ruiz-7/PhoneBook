@@ -7,8 +7,10 @@ import { useGetUserNumbers } from '@hooks/useGetUserNumbers'
 import { NumberList } from '@containers/NumberList'
 import { AddNumberButton } from '@components/AddNumberButton'
 import { AddNumber } from '@components/AddNumber'
+import { DeleteNumber } from '@components/DeleteNumber'
 //Import Portal
 import { Modal } from '@pages/Modal'
+import { DeleteAlert } from '@pages/DeleteAlert'
 //Import Context
 import { AppContext } from '@context/AppContext'
 //Import Styles
@@ -17,6 +19,8 @@ import '@styles/Home.css'
 const Home = () => {
 
     const {openModal}= React.useContext(AppContext);
+    const {openDeleteAlert}= React.useContext(AppContext);
+
 
     const [loading,setLoading]=useState(true);
     const [user,setUser]=useState({name:null,email:null})
@@ -56,12 +60,20 @@ const Home = () => {
                     </>
                 )}
             </main>
-            <AddNumberButton />
+            {!openDeleteAlert &&(
+                <AddNumberButton />
+            )}
             
             {openModal &&(
                 <Modal>
                     <AddNumber />
                 </Modal>
+            )}
+
+            {openDeleteAlert &&(
+                <DeleteAlert>
+                    <DeleteNumber />
+                </DeleteAlert>
             )}
         </>
     )

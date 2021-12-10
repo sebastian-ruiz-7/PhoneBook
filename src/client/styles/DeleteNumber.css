@@ -1,0 +1,56 @@
+:root{
+    font-size: 62.5%;
+    --white: #FFFFFF;
+    --black: #000000;
+    --very-light-pink: #C7C7C7;
+    --text-input-field: #F7F7F7;
+    --hospital-green: #ACD9B2;
+    --sm: 14px;
+    --md: 16px;
+    --lg: 18px;
+}
+
+.del-num-container{
+    font-family: 'Quicksand', sans-serif;
+    width: 300px;
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+}
+
+.del-num__title{
+    text-align: center;
+    font-weight: bolder;
+    font-size: var(--lg);
+}
+
+.del-num__form{
+    display: flex;
+    flex-direction: column;
+}
+
+.buttons-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.del-num__button{
+    margin-top: 20px;
+    width: 90px;
+    height: 32px;
+    cursor: pointer;
+    border: none;
+    font-weight: 500;
+    border-radius: 2px;
+    font-size: var(--md);
+}
+
+.del-num__button--cancel{
+    background: transparent;
+}
+
+.del-num__button--submit{
+    background-color: var(--hospital-green);
+    color: var(--white);
+}
