@@ -9,10 +9,11 @@ import '@styles/DeleteNumber.css'
 
 const DeleteNumber = () => {
 
-    const {openDeleteAlert,setOpenDeleteAlert,desiredContact} =React.useContext(AppContext);
+    const {openDeleteAlert,setOpenDeleteAlert,desiredContact,showAddNumButton,setShowAddNumButton} =React.useContext(AppContext);
 
     const onCancel=(event)=>{
         event.preventDefault();
+        setShowAddNumButton(!showAddNumButton);
         setOpenDeleteAlert(!openDeleteAlert);
     }
 
