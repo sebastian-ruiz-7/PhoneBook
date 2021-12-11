@@ -64,7 +64,7 @@ module.exports={
         static:{
             directory: path.join(__dirname,'dist'),
         },
-        port:3005,
+        port:3006,
         compress:true,
         historyApiFallback:true
     }

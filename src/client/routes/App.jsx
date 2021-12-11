@@ -17,6 +17,7 @@ const App = () => {
             <BrowserRouter>
                 <Layout>
                     <Routes>
+                        <Route exact path='/'        element={< Home />} />
                         <Route exact path='/home'        element={< Home />} />
                         <Route exact path='/new-user'   element={< NewUser />} />
                         <Route exact path='/login'      element={< Login />} />

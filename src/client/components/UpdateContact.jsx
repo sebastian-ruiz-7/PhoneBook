@@ -10,11 +10,12 @@ import '@styles/UpdateContact.css';
 const UpdateContact = () => {
 
     const form=React.useRef(null);
-    const {desiredContact,setDesiredContact,openUpdateAlert,setOpenUpdateAlert} = React.useContext(AppContext);
+    const {desiredContact,setDesiredContact,openUpdateAlert,setOpenUpdateAlert,setShowAddNumButton,showAddNumButton} = React.useContext(AppContext);
 
 
     const onCancel=()=>{
-        setOpenUpdateAlert(!openUpdateAlert)
+        setOpenUpdateAlert(!openUpdateAlert);
+        setShowAddNumButton(!showAddNumButton);
     }
 
     const onSubmit=async(event)=>{
