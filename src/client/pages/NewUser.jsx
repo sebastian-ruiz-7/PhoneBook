@@ -24,7 +24,6 @@ const NewUser = () => {
 		console.log(data);
         axios.post(API_newUser,data)
             .then(response=>{
-                console.log(response);
                 localStorage.setItem('sessionJWT',response.data.body)
                 location.href='/home'
             }).catch(err=>console.error(err))
